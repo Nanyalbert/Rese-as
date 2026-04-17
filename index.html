@@ -1,3 +1,6 @@
+Reviews widget · HTML
+Copiar
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +10,7 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 2rem 1rem; }
+ 
 .bp-rv-section { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 3rem 2rem; }
 .bp-rv-header { text-align: center; margin-bottom: 2.5rem; }
 .bp-rv-header h2 { font-size: 26px; font-weight: 700; color: #111; margin-bottom: 16px; letter-spacing: -0.5px; }
@@ -15,31 +19,59 @@ body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 2rem 1
 .bp-rv-num { font-size: 26px; font-weight: 800; color: #fff; }
 .bp-rv-count { font-size: 13px; color: #aaa; }
 .bp-rv-gbadge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: #888; margin-top: 10px; }
-.bp-rv-wrapper { overflow: hidden; position: relative; margin: 0 -2rem; }
-.bp-rv-wrapper::before, .bp-rv-wrapper::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+ 
+/* Carousel con flechas */
+.bp-rv-carousel { position: relative; margin: 0 -2rem; }
+.bp-rv-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 1.5px solid #e8e8e8; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px; color: #111; transition: all 0.15s; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.bp-rv-arrow:hover { background: #111; color: #fff; border-color: #111; }
+.bp-rv-arrow.prev { left: 8px; }
+.bp-rv-arrow.next { right: 8px; }
+.bp-rv-arrow:disabled { opacity: 0.3; cursor: default; }
+.bp-rv-arrow:disabled:hover { background: #fff; color: #111; border-color: #e8e8e8; }
+ 
+.bp-rv-wrapper { overflow: hidden; position: relative; }
+.bp-rv-wrapper::before, .bp-rv-wrapper::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
 .bp-rv-wrapper::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
 .bp-rv-wrapper::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
-.bp-rv-track { display: flex; gap: 16px; padding: 1.5rem 3rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
+ 
+.bp-rv-track { display: flex; gap: 16px; padding: 1.5rem 3rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-behavior: smooth; cursor: grab; }
 .bp-rv-track::-webkit-scrollbar { display: none; }
 .bp-rv-track.drag { cursor: grabbing; user-select: none; }
-.bp-rv-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 16px; padding: 1.5rem; min-width: 300px; max-width: 320px; flex-shrink: 0; scroll-snap-align: start; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit; }
+ 
+.bp-rv-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 16px; padding: 1.5rem; min-width: 280px; max-width: 300px; flex-shrink: 0; scroll-snap-align: start; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit; }
 .bp-rv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #ddd; }
 .bp-rv-card-top { display: flex; align-items: center; gap: 12px; }
-.bp-rv-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.bp-rv-avatar { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: #111; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 17px; }
 .bp-rv-author { font-size: 14px; font-weight: 600; color: #111; }
 .bp-rv-time { font-size: 11px; color: #bbb; margin-top: 2px; }
-.bp-rv-stars { color: #F5C518; font-size: 15px; letter-spacing: 2px; }
+.bp-rv-stars { color: #F5C518; font-size: 14px; letter-spacing: 2px; }
 .bp-rv-text { font-size: 13px; color: #555; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
 .bp-rv-link-label { font-size: 11px; color: #4285F4; }
+.bp-rv-tag { display: inline-block; background: #f0f0f0; border-radius: 4px; padding: 2px 8px; font-size: 10px; color: #888; align-self: flex-start; }
+.bp-rv-tag.google { background: #e8f0fe; color: #4285F4; }
+ 
+/* Dots */
+.bp-rv-dots { display: flex; justify-content: center; gap: 6px; margin-top: 1.25rem; }
+.bp-rv-dot { width: 7px; height: 7px; border-radius: 50%; background: #e0e0e0; cursor: pointer; transition: background 0.2s, transform 0.2s; border: none; padding: 0; }
+.bp-rv-dot.active { background: #111; transform: scale(1.2); }
+ 
 .bp-rv-footer { text-align: center; margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
 .bp-rv-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #111; text-decoration: none; border: 1.5px solid #111; border-radius: 8px; padding: 10px 22px; transition: all 0.15s; }
 .bp-rv-btn:hover { background: #111; color: #fff; }
 .bp-rv-btn-g { border-color: #4285F4; color: #4285F4; }
 .bp-rv-btn-g:hover { background: #4285F4; color: #fff; }
 .bp-loading { text-align: center; padding: 3rem; color: #ccc; font-size: 14px; }
+ 
+@media (max-width: 600px) {
+  .bp-rv-section { padding: 2rem 1rem; border-radius: 16px; }
+  .bp-rv-header h2 { font-size: 20px; }
+  .bp-rv-card { min-width: 250px; }
+  .bp-rv-arrow { width: 34px; height: 34px; font-size: 15px; }
+}
 </style>
 </head>
 <body>
+ 
 <div class="bp-rv-section" id="bp-rv-section">
   <div class="bp-rv-header">
     <h2>Lo que dicen nuestros clientes</h2>
@@ -51,48 +83,162 @@ body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 2rem 1
       Reseñas verificadas de Google
     </div>
   </div>
-  <div class="bp-rv-wrapper">
-    <div class="bp-rv-track" id="bp-rv-track">
-      <div class="bp-loading">Cargando reseñas...</div>
+ 
+  <div class="bp-rv-carousel">
+    <button class="bp-rv-arrow prev" id="bp-prev" onclick="scrollCarousel(-1)">&#8249;</button>
+    <div class="bp-rv-wrapper">
+      <div class="bp-rv-track" id="bp-rv-track">
+        <div class="bp-loading">Cargando reseñas...</div>
+      </div>
     </div>
+    <button class="bp-rv-arrow next" id="bp-next" onclick="scrollCarousel(1)">&#8250;</button>
   </div>
+ 
+  <div class="bp-rv-dots" id="bp-dots"></div>
+ 
   <div class="bp-rv-footer">
-    <a href="https://www.google.com/maps/place/Black+%C3%93ptica+-+General+Paz/reviews" target="_blank" class="bp-rv-btn bp-rv-btn-g">Ver todas las reseñas en Google</a>
+    <a href="https://share.google/JXL2Um3U9P6fBTcFB" target="_blank" class="bp-rv-btn bp-rv-btn-g">
+      <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Ver todas las reseñas en Google
+    </a>
     <a href="https://www.blackoptica.ar" class="bp-rv-btn">Conocé nuestra tienda →</a>
   </div>
 </div>
+ 
 <script>
 var WORKER = 'https://floral-art-7d6c.nanyalbert.workers.dev/';
+ 
+// 5 mejores reseñas manuales seleccionadas
+var MANUALES = [
+  {
+    autor: 'Melanie Zarate',
+    tiempo: 'Hace 2 meses',
+    texto: 'Hermosa experiencia. Atención súper amorosa, paciencia para asesorar y mucha buena onda. Se nota cuando alguien trabaja con vocación. Recomiendo mucho esta óptica.',
+    link: 'https://share.google/JXL2Um3U9P6fBTcFB',
+    inicial: 'M'
+  },
+  {
+    autor: 'maria elena garibaldi',
+    tiempo: 'Hace 1 mes',
+    texto: 'Es excelente la atencion en este lugar!!! Black óptica me asesoro con los modelos para elegir el que mejor me quedaba, estuvieron listos en poco tiempo y muy recomendable por su calidad y precios ...hay para todos los gustos!!! Sin dudar no busco mas nada.',
+    link: 'https://share.google/JXL2Um3U9P6fBTcFB',
+    inicial: 'M'
+  },
+  {
+    autor: 'Agustina Ibarlucea',
+    tiempo: 'Hace 1 mes',
+    texto: 'Hice mis lentes en el local, y me llevo una excelente experiencia. Lean un genio asesorando, y el precio completamente accesible!',
+    link: 'https://share.google/JXL2Um3U9P6fBTcFB',
+    inicial: 'A'
+  },
+  {
+    autor: 'Lucio Damoli',
+    tiempo: 'Hace 1 mes',
+    texto: 'Muy buena atención por parte de los chicos! Mucha variedad de modelos y buen asesoramiento en general. Los precios son accesibles y los lentes se sienten de calidad!',
+    link: 'https://share.google/JXL2Um3U9P6fBTcFB',
+    inicial: 'L'
+  },
+  {
+    autor: 'Emilsegc',
+    tiempo: 'Hace 1 mes',
+    texto: 'Excelente atención y muy buena relación precio calidad!',
+    link: 'https://share.google/JXL2Um3U9P6fBTcFB',
+    inicial: 'E'
+  }
+];
+ 
 function stars(n) { return '★'.repeat(n) + '☆'.repeat(5-n); }
+ 
+function mkCard(autor, tiempo, texto, link, foto, inicial, isGoogle) {
+  var avatarHtml = foto
+    ? '<img class="bp-rv-avatar" src="'+foto+'" alt="'+autor+'" onerror="this.outerHTML=\'<div class=\\\"bp-rv-avatar\\\">'+inicial+'</div>\'">'
+    : '<div class="bp-rv-avatar">'+inicial+'</div>';
+  return '<a class="bp-rv-card" href="'+link+'" target="_blank" rel="noopener">'+
+    '<div class="bp-rv-card-top">'+avatarHtml+
+    '<div><div class="bp-rv-author">'+autor+'</div>'+
+    '<div class="bp-rv-time">'+tiempo+'</div></div></div>'+
+    '<div class="bp-rv-stars">★★★★★</div>'+
+    '<div class="bp-rv-text">'+texto+'</div>'+
+    (isGoogle ? '<div class="bp-rv-link-label">Ver reseña en Google →</div>' : '')+
+    '<span class="bp-rv-tag'+(isGoogle?' google':'')+'>'+(isGoogle?'Google':'Verificado')+'</span>'+
+    '</a>';
+}
+ 
+function updateDots(track) {
+  var dots = document.querySelectorAll('.bp-rv-dot');
+  var card = track.querySelector('.bp-rv-card');
+  if (!card) return;
+  var cardW = card.offsetWidth + 16;
+  var active = Math.round(track.scrollLeft / cardW);
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
+}
+ 
+function scrollCarousel(dir) {
+  var track = document.getElementById('bp-rv-track');
+  var card = track.querySelector('.bp-rv-card');
+  if (!card) return;
+  track.scrollLeft += dir * (card.offsetWidth + 16);
+  setTimeout(function(){ updateDots(track); }, 350);
+}
+ 
 fetch(WORKER)
   .then(function(r){ return r.json(); })
   .then(function(data){
     if(!data||data.error){ document.getElementById('bp-rv-section').style.display='none'; return; }
+ 
     document.getElementById('bp-rv-summary').innerHTML =
-      '<span class="bp-rv-stars-big">★★★★★</span>' +
-      '<span class="bp-rv-num">'+data.rating+'</span>' +
+      '<span class="bp-rv-stars-big">★★★★★</span>'+
+      '<span class="bp-rv-num">'+data.rating+'</span>'+
       '<span class="bp-rv-count">'+data.userRatingCount+' reseñas</span>';
     document.getElementById('bp-rv-badge').style.display='inline-flex';
-    if(data.reviews&&data.reviews.length){
-      var track=document.getElementById('bp-rv-track');
-      track.innerHTML=data.reviews.map(function(r){
-        return '<a class="bp-rv-card" href="'+r.googleMapsUri+'" target="_blank" rel="noopener">'+
-          '<div class="bp-rv-card-top">'+
-          '<img class="bp-rv-avatar" src="'+r.authorAttribution.photoUri+'" alt="'+r.authorAttribution.displayName+'">'+
-          '<div><div class="bp-rv-author">'+r.authorAttribution.displayName+'</div>'+
-          '<div class="bp-rv-time">'+r.relativePublishTimeDescription+'</div></div></div>'+
-          '<div class="bp-rv-stars">'+stars(r.rating)+'</div>'+
-          '<div class="bp-rv-text">'+r.text.text.replace(/\n/g,' ')+'</div>'+
-          '<div class="bp-rv-link-label">Ver reseña en Google →</div>'+
-          '</a>';
-      }).join('');
-      var isDown=false,startX,scrollLeft;
-      track.addEventListener('mousedown',function(e){isDown=true;track.classList.add('drag');startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;});
-      document.addEventListener('mouseup',function(){isDown=false;track.classList.remove('drag');});
-      track.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();track.scrollLeft=scrollLeft-(e.pageX-track.offsetLeft-startX)*1.5;});
+ 
+    var track = document.getElementById('bp-rv-track');
+    var cards = [];
+ 
+    // 5 de Google en tiempo real
+    if(data.reviews && data.reviews.length) {
+      data.reviews.forEach(function(r){
+        cards.push(mkCard(
+          r.authorAttribution.displayName,
+          r.relativePublishTimeDescription,
+          r.text.text.replace(/\n/g,' '),
+          r.googleMapsUri,
+          r.authorAttribution.photoUri,
+          r.authorAttribution.displayName.charAt(0).toUpperCase(),
+          true
+        ));
+      });
     }
+ 
+    // 5 manuales
+    MANUALES.forEach(function(m){
+      cards.push(mkCard(m.autor, m.tiempo, m.texto, m.link, null, m.inicial, false));
+    });
+ 
+    track.innerHTML = cards.join('');
+ 
+    // Dots
+    var dotsEl = document.getElementById('bp-dots');
+    cards.forEach(function(_, i){
+      var d = document.createElement('button');
+      d.className = 'bp-rv-dot' + (i===0?' active':'');
+      d.onclick = function(){
+        var card = track.querySelector('.bp-rv-card');
+        track.scrollLeft = i * (card.offsetWidth + 16);
+        setTimeout(function(){ updateDots(track); }, 350);
+      };
+      dotsEl.appendChild(d);
+    });
+ 
+    track.addEventListener('scroll', function(){ updateDots(track); });
+ 
+    // Drag
+    var isDown=false, startX, scrollLeft;
+    track.addEventListener('mousedown', function(e){ isDown=true; track.classList.add('drag'); startX=e.pageX-track.offsetLeft; scrollLeft=track.scrollLeft; });
+    document.addEventListener('mouseup', function(){ isDown=false; track.classList.remove('drag'); });
+    track.addEventListener('mousemove', function(e){ if(!isDown)return; e.preventDefault(); track.scrollLeft=scrollLeft-(e.pageX-track.offsetLeft-startX)*1.5; });
   })
-  .catch(function(){document.getElementById('bp-rv-section').style.display='none';});
+  .catch(function(){ document.getElementById('bp-rv-section').style.display='none'; });
 </script>
 </body>
 </html>
