@@ -6,214 +6,93 @@
 <title>Black Óptica — Reseñas</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; }
- 
-.bp-reviews-section {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 3rem 1rem;
-  background: #fff;
-  border-radius: 16px;
-}
-.bp-reviews-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.bp-reviews-header h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 12px;
-  letter-spacing: -0.3px;
-}
-.bp-reviews-summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: #f7f7f7;
-  border-radius: 50px;
-  padding: 8px 20px;
-  margin-bottom: 8px;
-}
-.bp-stars-big { color: #F5C518; font-size: 20px; letter-spacing: 2px; }
-.bp-rating-num { font-size: 22px; font-weight: 800; color: #111; }
-.bp-rating-count { font-size: 13px; color: #888; }
-.bp-google-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #888;
-  margin-top: 8px;
-}
-.bp-reviews-track-wrapper {
-  overflow: hidden;
-  position: relative;
-  margin: 0 -1rem;
-}
-.bp-reviews-track-wrapper::before,
-.bp-reviews-track-wrapper::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-.bp-reviews-track-wrapper::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
-.bp-reviews-track-wrapper::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
-.bp-reviews-track {
-  display: flex;
-  gap: 14px;
-  padding: 1rem 2rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  cursor: grab;
-}
-.bp-reviews-track::-webkit-scrollbar { display: none; }
-.bp-reviews-track.dragging { cursor: grabbing; user-select: none; }
-.bp-review-card {
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 14px;
-  padding: 1.25rem;
-  min-width: 280px;
-  max-width: 300px;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.bp-review-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
-.bp-review-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.bp-review-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: #f0f0f0;
-}
-.bp-review-author { font-size: 13px; font-weight: 600; color: #111; }
-.bp-review-time { font-size: 11px; color: #aaa; margin-top: 1px; }
-.bp-stars-small { color: #F5C518; font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
-.bp-review-text {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.6;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.bp-reviews-footer { text-align: center; margin-top: 1.5rem; }
-.bp-ver-mas {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #111;
-  text-decoration: none;
-  border: 1.5px solid #111;
-  border-radius: 8px;
-  padding: 8px 18px;
-  transition: all 0.15s;
-}
-.bp-ver-mas:hover { background: #111; color: #fff; }
-.bp-loading { text-align: center; padding: 2rem; color: #aaa; font-size: 13px; }
+body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 2rem 1rem; }
+.bp-rv-section { max-width: 960px; margin: 0 auto; background: #fff; border-radius: 20px; padding: 3rem 2rem; }
+.bp-rv-header { text-align: center; margin-bottom: 2.5rem; }
+.bp-rv-header h2 { font-size: 26px; font-weight: 700; color: #111; margin-bottom: 16px; letter-spacing: -0.5px; }
+.bp-rv-summary { display: inline-flex; align-items: center; gap: 12px; background: #111; border-radius: 50px; padding: 12px 28px; margin-bottom: 12px; }
+.bp-rv-stars-big { color: #F5C518; font-size: 22px; letter-spacing: 3px; }
+.bp-rv-num { font-size: 26px; font-weight: 800; color: #fff; }
+.bp-rv-count { font-size: 13px; color: #aaa; }
+.bp-rv-gbadge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: #888; margin-top: 10px; }
+.bp-rv-wrapper { overflow: hidden; position: relative; margin: 0 -2rem; }
+.bp-rv-wrapper::before, .bp-rv-wrapper::after { content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none; }
+.bp-rv-wrapper::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
+.bp-rv-wrapper::after { right: 0; background: linear-gradient(to left, #fff, transparent); }
+.bp-rv-track { display: flex; gap: 16px; padding: 1.5rem 3rem; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; cursor: grab; }
+.bp-rv-track::-webkit-scrollbar { display: none; }
+.bp-rv-track.drag { cursor: grabbing; user-select: none; }
+.bp-rv-card { background: #fff; border: 1px solid #e8e8e8; border-radius: 16px; padding: 1.5rem; min-width: 300px; max-width: 320px; flex-shrink: 0; scroll-snap-align: start; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 12px; text-decoration: none; color: inherit; }
+.bp-rv-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); border-color: #ddd; }
+.bp-rv-card-top { display: flex; align-items: center; gap: 12px; }
+.bp-rv-avatar { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.bp-rv-author { font-size: 14px; font-weight: 600; color: #111; }
+.bp-rv-time { font-size: 11px; color: #bbb; margin-top: 2px; }
+.bp-rv-stars { color: #F5C518; font-size: 15px; letter-spacing: 2px; }
+.bp-rv-text { font-size: 13px; color: #555; line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; flex: 1; }
+.bp-rv-link-label { font-size: 11px; color: #4285F4; }
+.bp-rv-footer { text-align: center; margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.bp-rv-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #111; text-decoration: none; border: 1.5px solid #111; border-radius: 8px; padding: 10px 22px; transition: all 0.15s; }
+.bp-rv-btn:hover { background: #111; color: #fff; }
+.bp-rv-btn-g { border-color: #4285F4; color: #4285F4; }
+.bp-rv-btn-g:hover { background: #4285F4; color: #fff; }
+.bp-loading { text-align: center; padding: 3rem; color: #ccc; font-size: 14px; }
 </style>
 </head>
 <body>
- 
-<div class="bp-reviews-section" id="bp-reviews-section">
-  <div class="bp-reviews-header">
+<div class="bp-rv-section" id="bp-rv-section">
+  <div class="bp-rv-header">
     <h2>Lo que dicen nuestros clientes</h2>
-    <div class="bp-reviews-summary" id="bp-summary">
-      <div class="bp-loading">Cargando reseñas...</div>
+    <div id="bp-rv-summary" class="bp-rv-summary">
+      <span style="color:#fff;font-size:13px;">Cargando...</span>
     </div>
-    <div class="bp-google-badge" id="bp-badge" style="display:none;">
-      <svg width="16" height="16" viewBox="0 0 24 24">
-        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-      </svg>
+    <div class="bp-rv-gbadge" id="bp-rv-badge" style="display:none;">
+      <svg width="14" height="14" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
       Reseñas verificadas de Google
     </div>
   </div>
-  <div class="bp-reviews-track-wrapper">
-    <div class="bp-reviews-track" id="bp-track">
-      <div class="bp-loading">Cargando...</div>
+  <div class="bp-rv-wrapper">
+    <div class="bp-rv-track" id="bp-rv-track">
+      <div class="bp-loading">Cargando reseñas...</div>
     </div>
   </div>
-  <div class="bp-reviews-footer">
-    <a href="https://www.google.com/maps/place/Black+%C3%93ptica+-+General+Paz/reviews" target="_blank" class="bp-ver-mas">
-      Ver todas las reseñas en Google →
-    </a>
+  <div class="bp-rv-footer">
+    <a href="https://www.google.com/maps/place/Black+%C3%93ptica+-+General+Paz/reviews" target="_blank" class="bp-rv-btn bp-rv-btn-g">Ver todas las reseñas en Google</a>
+    <a href="https://www.blackoptica.ar" class="bp-rv-btn">Conocé nuestra tienda →</a>
   </div>
 </div>
- 
 <script>
-const PLACE_ID = 'ChIJE3jQROGjMpQRNAvP3fUNl3I';
-const API_KEY = 'AIzaSyDJ1pr3oCPNfTdGbsm2qPzwFKqsOB8yMxo';
- 
-function estrellas(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
- 
-fetch(`https://places.googleapis.com/v1/places/${PLACE_ID}?fields=displayName,rating,userRatingCount,reviews&languageCode=es&key=${API_KEY}`)
-  .then(r => r.json())
-  .then(data => {
-    if (data.error) { document.getElementById('bp-reviews-section').style.display = 'none'; return; }
- 
-    document.getElementById('bp-summary').innerHTML = `
-      <span class="bp-stars-big">★★★★★</span>
-      <span class="bp-rating-num">${data.rating}</span>
-      <span class="bp-rating-count">${data.userRatingCount} reseñas en Google</span>
-    `;
-    document.getElementById('bp-badge').style.display = 'flex';
- 
-    if (data.reviews && data.reviews.length) {
-      const track = document.getElementById('bp-track');
-      track.innerHTML = data.reviews.map(r => `
-        <div class="bp-review-card">
-          <div class="bp-review-top">
-            <img class="bp-review-avatar"
-              src="${r.authorAttribution.photoUri}"
-              alt="${r.authorAttribution.displayName}"
-              onerror="this.style.background='#e0e0e0'"
-            />
-            <div>
-              <div class="bp-review-author">${r.authorAttribution.displayName}</div>
-              <div class="bp-review-time">${r.relativePublishTimeDescription}</div>
-            </div>
-          </div>
-          <div class="bp-stars-small">${estrellas(r.rating)}</div>
-          <div class="bp-review-text">${r.text.text.replace(/\n/g, ' ')}</div>
-        </div>
-      `).join('');
- 
-      // Drag to scroll
-      let isDown = false, startX, scrollLeft;
-      track.addEventListener('mousedown', e => { isDown = true; track.classList.add('dragging'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
-      document.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
-      track.addEventListener('mousemove', e => {
-        if (!isDown) return;
-        e.preventDefault();
-        track.scrollLeft = scrollLeft - (e.pageX - track.offsetLeft - startX) * 1.5;
-      });
+var WORKER = 'https://floral-art-7d6c.nanyalbert.workers.dev/';
+function stars(n) { return '★'.repeat(n) + '☆'.repeat(5-n); }
+fetch(WORKER)
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    if(!data||data.error){ document.getElementById('bp-rv-section').style.display='none'; return; }
+    document.getElementById('bp-rv-summary').innerHTML =
+      '<span class="bp-rv-stars-big">★★★★★</span>' +
+      '<span class="bp-rv-num">'+data.rating+'</span>' +
+      '<span class="bp-rv-count">'+data.userRatingCount+' reseñas</span>';
+    document.getElementById('bp-rv-badge').style.display='inline-flex';
+    if(data.reviews&&data.reviews.length){
+      var track=document.getElementById('bp-rv-track');
+      track.innerHTML=data.reviews.map(function(r){
+        return '<a class="bp-rv-card" href="'+r.googleMapsUri+'" target="_blank" rel="noopener">'+
+          '<div class="bp-rv-card-top">'+
+          '<img class="bp-rv-avatar" src="'+r.authorAttribution.photoUri+'" alt="'+r.authorAttribution.displayName+'">'+
+          '<div><div class="bp-rv-author">'+r.authorAttribution.displayName+'</div>'+
+          '<div class="bp-rv-time">'+r.relativePublishTimeDescription+'</div></div></div>'+
+          '<div class="bp-rv-stars">'+stars(r.rating)+'</div>'+
+          '<div class="bp-rv-text">'+r.text.text.replace(/\n/g,' ')+'</div>'+
+          '<div class="bp-rv-link-label">Ver reseña en Google →</div>'+
+          '</a>';
+      }).join('');
+      var isDown=false,startX,scrollLeft;
+      track.addEventListener('mousedown',function(e){isDown=true;track.classList.add('drag');startX=e.pageX-track.offsetLeft;scrollLeft=track.scrollLeft;});
+      document.addEventListener('mouseup',function(){isDown=false;track.classList.remove('drag');});
+      track.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();track.scrollLeft=scrollLeft-(e.pageX-track.offsetLeft-startX)*1.5;});
     }
   })
-  .catch(() => { document.getElementById('bp-reviews-section').style.display = 'none'; });
+  .catch(function(){document.getElementById('bp-rv-section').style.display='none';});
 </script>
 </body>
 </html>
